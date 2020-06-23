@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eric Lopes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <header>
+        <div class="links">
+            <a href="./index.html">Início</a>
+            <a href="./sobre.html">Sobre</a>
+            <a href="./portifolio.html">Aulas</a> 
+            <a href="./conteudos.html" class="actual-page">Conteúdos</a>
+        </div>
+    </header>
+
+    <div id="wrapper">
+        <h1>Conteúdos</h1>
+    </div>
+
+    <div id="card-contents">
+        <div class="card-bootcamp" id="starter">
+            <div class="card-img">
+                <img src="https://skylab.rocketseat.com.br/static/64c237ccff807c054339a62d53b4b402.svg" alt="starter">
+            </div>
+            <div class="card-info-bootcamp">
+                <p>5 Módulos</p>
+                <p class="npg">Free</p>
+            </div>
+        </div>
+        <div class="card-bootcamp" id="launchbase">
+            <div class="card-img">
+                <img src="https://skylab.rocketseat.com.br/static/0828532024cb46921a6b5e941f8d788d.svg" alt="starter">
+            </div>
+            <div class="card-info-bootcamp">
+                <p>7 Módulos</p>
+                <p class="pg">Pago</p>
+            </div>
+        </div>
+        <div class="card-bootcamp" id="gostack">
+            <div class="card-img">
+                <img src="https://skylab.rocketseat.com.br/static/83a178a0653dab1d55e2ed7946465975.svg" alt="starter">
+            </div>
+            <div class="card-info-bootcamp">
+                <p>10 Módulos</p>
+                <p class="pg">Pago</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay-contents">
+        <div class="modal-cont">
+            <div class="modal-close-maximize">
+                <i class="material-icons maximize-content" id="non-activated">
+                    aspect_ratio
+                </i>
+                <i class="material-icons close-content">
+                    close
+                </i>
+            </div>
+            <div class="modal-info">
+                <iframe src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //MODAL DOS CURSOS DA ROCKETSEAT
+
+        const modalOverlayContents = document.querySelector('.modal-overlay-contents');
+        const cardsBootcamp = document.querySelectorAll('.card-bootcamp');
+        const maximizeContent = document.querySelector('.maximize-content');
+        const modalCont = document.querySelector('.modal-cont');
+
+        for(let cardBootcamp of cardsBootcamp) {
+            cardBootcamp.addEventListener('click', ()=>{
+                const cardId = cardBootcamp.getAttribute('id');
+                modalOverlayContents.classList.add('active-contents');
+                document.querySelector('iframe').src=`https://rocketseat.com.br/${cardId}`;
+            })
+        }
+
+        document.querySelector('.close-content').addEventListener('click', ()=>{
+            modalOverlayContents.classList.remove('active-contents');
+            document.querySelector('iframe').src="";
+            modalCont.style.width = '90%';
+                modalCont.style.height = '90%';
+                modalCont.style.margin = '5vh auto';
+                modalCont.style.borderRadius = '15px';
+
+                const modalInfo = document.querySelector('.modal-info');
+                modalInfo.style.height = '90%';
+        })        
+
+        maximizeContent.addEventListener('click', ()=> {
+
+            if(maximizeContent.getAttribute('id') == 'activated') {
+                modalCont.style.width = '90%';
+                modalCont.style.height = '90%';
+                modalCont.style.margin = '5vh auto';
+                modalCont.style.borderRadius = '15px';
+
+                const modalInfo = document.querySelector('.modal-info');
+                modalInfo.style.height = '90%';
+
+                maximizeContent.setAttribute('id', 'non-activated');
+            } else {
+                maximizeContent.setAttribute('id', 'activated');
+
+                modalCont.style.width = '100%';
+                modalCont.style.height = '100%';
+                modalCont.style.margin = '0';
+                modalCont.style.borderRadius = '0';
+
+                const modalInfo = document.querySelector('.modal-info');
+                modalInfo.style.height = '100%';
+            }
+        })
+    </script>
+</body>
+</html>
