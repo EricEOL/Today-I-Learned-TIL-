@@ -1,0 +1,31 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+
+    <div id="wrapper">
+        <h1>Conteúdos</h1>
+    </div>
+
+    <div id="alone-card">
+        <div class="card-bootcamp" id="{{course.name}}">
+            <div class="card-img">
+                <img src="{{course.img_url}}" alt="{{course.name}}">
+            </div>
+            <div class="card-info-bootcamp">
+                <p>{{course.qty_modules}}</p>
+                <p class="npg">{{course.price}}</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const cardBootcamp = document.querySelector('.card-bootcamp');
+        
+        cardBootcamp.addEventListener('click', ()=>{
+            const cardId = cardBootcamp.getAttribute('id');
+            window.location.href = `https://rocketseat.com.br/${cardId}`;
+        });
+    </script>
+</body>
+</html>
+
+{% endblock %}

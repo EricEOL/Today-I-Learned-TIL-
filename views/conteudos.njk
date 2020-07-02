@@ -1,0 +1,95 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+
+    <div id="wrapper">
+        <h1>Conteúdos</h1>
+    </div>
+
+    <div id="card-contents">
+        {% for course in courses %}
+        <div class="card-bootcamp" id="{{course.name}}">
+            <div class="card-img">
+                <img src="{{course.img_url}}" alt="{{course.name}}">
+            </div>
+            <div class="card-info-bootcamp">
+                <p>{{course.qty_modules}}</p>
+                <p class="npg">{{course.price}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="modal-overlay-contents">
+        <div class="modal-cont">
+            <div class="modal-close-maximize">
+                <i class="material-icons maximize-content" id="non-activated">
+                    aspect_ratio
+                </i>
+                <i class="material-icons close-content">
+                    close
+                </i>
+            </div>
+            <div class="modal-info">
+                <iframe src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //MODAL DOS CURSOS DA ROCKETSEAT
+
+        const modalOverlayContents = document.querySelector('.modal-overlay-contents');
+        const cardsBootcamp = document.querySelectorAll('.card-bootcamp');
+        const maximizeContent = document.querySelector('.maximize-content');
+        const modalCont = document.querySelector('.modal-cont');
+
+        for(let cardBootcamp of cardsBootcamp) {
+            cardBootcamp.addEventListener('click', ()=>{
+                const cardId = cardBootcamp.getAttribute('id');
+                modalOverlayContents.classList.add('active-contents');
+                document.querySelector('iframe').src=`https://rocketseat.com.br/${cardId}`;
+            })
+        }
+
+        document.querySelector('.close-content').addEventListener('click', ()=>{
+            modalOverlayContents.classList.remove('active-contents');
+            document.querySelector('iframe').src="";
+            modalCont.style.width = '90%';
+                modalCont.style.height = '90%';
+                modalCont.style.margin = '5vh auto';
+                modalCont.style.borderRadius = '15px';
+
+                const modalInfo = document.querySelector('.modal-info');
+                modalInfo.style.height = '90%';
+        })        
+
+        maximizeContent.addEventListener('click', ()=> {
+
+            if(maximizeContent.getAttribute('id') == 'activated') {
+                modalCont.style.width = '90%';
+                modalCont.style.height = '90%';
+                modalCont.style.margin = '5vh auto';
+                modalCont.style.borderRadius = '15px';
+
+                const modalInfo = document.querySelector('.modal-info');
+                modalInfo.style.height = '90%';
+
+                maximizeContent.setAttribute('id', 'non-activated');
+            } else {
+                maximizeContent.setAttribute('id', 'activated');
+
+                modalCont.style.width = '100%';
+                modalCont.style.height = '100%';
+                modalCont.style.margin = '0';
+                modalCont.style.borderRadius = '0';
+
+                const modalInfo = document.querySelector('.modal-info');
+                modalInfo.style.height = '100%';
+            }
+        })
+    </script>
+</body>
+</html>
+
+{% endblock %}
